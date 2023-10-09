@@ -12,4 +12,7 @@ public class Constant : MonoBehaviour
     public const string ANIM_SWAP = "doSwap";
     public const string ANIM_SWING = "doSwing";
     public const string ANIM_SHOT = "doShot";
+    public const string ANIM_WALK = "isWalk";
+    public const string ANIM_ATTACK = "isAttack";
+    public const string ANIM_DIE = "isDie";
 }

@@ -182,6 +182,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    public void takeDamage(int damage)
+    {
+        heart -= damage;
+        if(heart <= 0)
+        {
+            //die
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ground")

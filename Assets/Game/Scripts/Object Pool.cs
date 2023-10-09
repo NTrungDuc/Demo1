@@ -8,7 +8,7 @@ public class ObjectPool : MonoBehaviour
     public List<GameObject> pooledObjects;
     public GameObject objectToPool;
     public int amountToPool;
-
+    public int idGun;
     void Awake()
     {
         SharedInstance = this;

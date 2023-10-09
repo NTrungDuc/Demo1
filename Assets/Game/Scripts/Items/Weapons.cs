@@ -13,7 +13,7 @@ public class Weapons : MonoBehaviour
     public BoxCollider meleeArea;
     public TrailRenderer trailEffect;
     public Transform bulletPos;
-    public GameObject bullet;
+    public ObjectPool bulletPool;
 
     public void Use()
     {
@@ -41,7 +41,7 @@ public class Weapons : MonoBehaviour
     }
     public void activeBullet()
     {
-        GameObject bullet = ObjectPool.SharedInstance.GetPooledObject();
+        GameObject bullet = bulletPool.GetPooledObject();
         if (bullet != null)
         {
             bullet.transform.position = bulletPos.transform.position;
@@ -49,18 +49,5 @@ public class Weapons : MonoBehaviour
             bullet.SetActive(true);
         }
     }
-    //private void OnEnable()
-    //{
-    //    if (type == Type.Range)
-    //    {
-    //        bullet.SetActive(true);
-    //    }
-    //}
-    //private void OnDisable()
-    //{
-    //    if (type == Type.Range)
-    //    {
-    //        bullet.SetActive(false);
-    //    }
-    //}
+
 }
