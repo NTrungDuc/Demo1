@@ -6,6 +6,7 @@ public class Constant : MonoBehaviour
 {
     public const string TAG_PLAYER = "Player";
     public const string TAG_BOT = "Bot";
+    public const string TAG_WALL = "Wall";
     public const string ANIM_RUN = "isRun";
     public const string ANIM_DODGE = "doDodge";
     public const string ANIM_JUMP = "doJump";

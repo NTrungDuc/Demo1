@@ -9,9 +9,14 @@ public class bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Wall")
+        if (collision.CompareTag(Constant.TAG_WALL))
         {
             gameObject.SetActive(false);
+        }
+        if (collision.CompareTag(Constant.TAG_BOT))
+        {
+            gameObject.SetActive(false);
+            collision.GetComponent<BotController>().takeDamage(damage);
         }
     }
     private void OnEnable()

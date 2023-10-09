@@ -94,6 +94,21 @@ public class BotController : MonoBehaviour
         ChangeAnim(Constant.ANIM_ATTACK, true);
         Target.GetComponent<PlayerMovement>().takeDamage(damageSlash);
     }
+    public void takeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0) {
+            //die
+            StartCoroutine(OnDeath());
+        }
+    }
+    public IEnumerator OnDeath()
+    {
+        stopMoving();
+        ChangeAnim(Constant.ANIM_DIE, true);
+        yield return new WaitForSeconds(3f);
+        gameObject.SetActive(false);
+    }
     public void ChangeState(IState newState)
     {
         currentState?.OnExit(this);
