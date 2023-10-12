@@ -8,7 +8,7 @@ public class Weapons : MonoBehaviour
 {
     public enum Type { Melle,Range};
     public Type type;
-    public int damage;
+    //public int damage;
     public float rate;
     public BoxCollider meleeArea;
     public TrailRenderer trailEffect;

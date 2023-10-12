@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
+    public enum Type { Player, EnemyA, EnemyC};
+    public Type type;
     public int damage;
+    public int speed;
     [SerializeField] Rigidbody rb;
+    public GameObject player;
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -13,14 +17,40 @@ public class bullet : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        if (collision.CompareTag(Constant.TAG_BOT))
+        if (type == Type.Player)
         {
-            gameObject.SetActive(false);
-            collision.GetComponent<BotController>().takeDamage(damage);
+            if (collision.CompareTag(Constant.TAG_BOT))
+            {
+                gameObject.SetActive(false);
+                collision.GetComponent<BotController>().takeDamage(damage);
+            }
         }
+        if (type == Type.EnemyA)
+        {
+            if (collision.CompareTag(Constant.TAG_PLAYER))
+            {
+                //collision.GetComponent<PlayerMovement>().takeDamage(damage);
+                InvokeRepeating("ApplyDamage", 1f, 3f);
+            }
+        }
+        if (type == Type.EnemyC)
+        {
+            if (collision.CompareTag(Constant.TAG_PLAYER))
+            {
+                gameObject.SetActive(false);
+                collision.GetComponent<PlayerMovement>().takeDamage(damage);
+            }
+        }
+    }
+    public void ApplyDamage()
+    {
+        player.GetComponent<PlayerMovement>().takeDamage(damage);
     }
     private void OnEnable()
     {
-        rb.velocity = transform.forward * 50;
+        if (type != Type.EnemyA)
+        {
+            rb.velocity = transform.forward * speed;
+        }
     }
 }

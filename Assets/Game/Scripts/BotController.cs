@@ -1,7 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class BotController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class BotController : MonoBehaviour
     public int id;
     public float enemyMaxHealth = 100;
     public float currentHealth;
-    public int damageSlash = 2;
+    //public int damageSlash = 2;
     public float attackRadius = 4;
     //
     string currentAnimName;
@@ -21,8 +22,9 @@ public class BotController : MonoBehaviour
     public Vector3 randomPoint;
     //
     [SerializeField] Transform Target;
-    private float chaseRadius = 12;
+    public float chaseRadius = 12;
     private IState currentState;
+    [SerializeField] Weapons weaponsRange;
     public IState CurrentState { get => currentState; set => currentState = value; }
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,7 @@ public class BotController : MonoBehaviour
     }
     Vector3 GetRandomPointOnNavMesh(Vector3 origin, float distance)
     {
+        transform.DOLookAt(Target.position, 1f);
         Vector3 randomDirection = Random.insideUnitSphere;
         randomDirection.y = 0f;
         randomDirection.Normalize();
@@ -92,7 +95,10 @@ public class BotController : MonoBehaviour
     {
         //Debug.Log("attack");
         ChangeAnim(Constant.ANIM_ATTACK, true);
-        Target.GetComponent<PlayerMovement>().takeDamage(damageSlash);
+        if (id == 1)
+        {
+            weaponsRange.Use();
+        }
     }
     public void takeDamage(int damage)
     {
