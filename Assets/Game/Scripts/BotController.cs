@@ -21,6 +21,7 @@ public class BotController : MonoBehaviour
     public float range;
     public Vector3 randomPoint;
     //
+    public int score;
     [SerializeField] Transform Target;
     public float chaseRadius = 12;
     private IState currentState;
@@ -114,6 +115,7 @@ public class BotController : MonoBehaviour
         ChangeAnim(Constant.ANIM_DIE, true);
         yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
+        SettingsPanel.Instance.IncreaseScore(score);
     }
     public void ChangeState(IState newState)
     {

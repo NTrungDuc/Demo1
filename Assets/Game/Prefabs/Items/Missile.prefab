@@ -157,10 +157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40698f14163140b44bb7b2d1e06df8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 3
   damage: 10
   speed: 5
   rb: {fileID: 3868596073923996167}
+  player: {fileID: 0}
 --- !u!65 &8736864374663002593
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    public enum Type { Player, EnemyA, EnemyC};
+    public enum Type {PlayerMelle, PlayerGun, EnemyA, EnemyC};
     public Type type;
     public int damage;
     public int speed;
@@ -17,7 +17,7 @@ public class bullet : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        if (type == Type.Player)
+        if (type == Type.PlayerGun)
         {
             if (collision.CompareTag(Constant.TAG_BOT))
             {
@@ -41,6 +41,13 @@ public class bullet : MonoBehaviour
                 collision.GetComponent<PlayerMovement>().takeDamage(damage);
             }
         }
+        if(type == Type.PlayerMelle)
+        {
+            if (collision.CompareTag(Constant.TAG_BOT))
+            {
+                collision.GetComponent<BotController>().takeDamage(damage);
+            }
+        }
     }
     public void ApplyDamage()
     {
@@ -48,7 +55,7 @@ public class bullet : MonoBehaviour
     }
     private void OnEnable()
     {
-        if (type != Type.EnemyA)
+        if (type != Type.EnemyA && type !=Type.PlayerMelle)
         {
             rb.velocity = transform.forward * speed;
         }

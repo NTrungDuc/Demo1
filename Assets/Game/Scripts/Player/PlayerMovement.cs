@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     //Input
@@ -30,7 +30,11 @@ public class PlayerMovement : MonoBehaviour
     public int maxCoin;
     public int maxHeart;
     public int maxHasGrenades;
-
+    //UI
+    //[SerializeField] private Text txtScore;
+    [SerializeField] private Text txtCoin;
+    [SerializeField] private Text txtHP;
+    [SerializeField] private Text txtArmor;
     //movement
     Vector3 moveVec;
     [SerializeField] private float speed;
@@ -182,6 +186,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    public void Die()
+    {
+        if(!isJump)
+        {
+            animator.SetBool(Constant.ANIM_DIE, true);
+        }
+    }
     public void takeDamage(int damage)
     {
         heart -= damage;
@@ -206,14 +217,17 @@ public class PlayerMovement : MonoBehaviour
             {
                 case Item.Type.Ammo:
                     ammo += item.value;
+                    txtArmor.text = "Armor: " + ammo.ToString();
                     if (ammo > maxAmmo) ammo = maxAmmo;
                     break;
                 case Item.Type.Coin:
                     coin += item.value;
+                    txtCoin.text="COIN: "+coin.ToString();
                     if (coin > maxCoin) coin = maxCoin;
                     break;
                 case Item.Type.Heart:
                     heart += item.value;
+                    txtHP.text = "HP: " + heart.ToString();
                     if (heart > maxHeart) heart = maxHeart;
                     break;
                 case Item.Type.Grenade:
