@@ -195,7 +195,16 @@ public class PlayerMovement : MonoBehaviour
     }
     public void takeDamage(int damage)
     {
-        heart -= damage;
+        if (ammo > 0)
+        {
+            ammo -= damage;
+            txtArmor.text = "Armor: " + ammo.ToString();
+        }
+        else if (ammo <= 0)
+        {
+            heart -= damage;
+            txtHP.text = "HP: " + heart.ToString();
+        }
         if(heart <= 0)
         {
             //die
